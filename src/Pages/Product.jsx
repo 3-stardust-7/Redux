@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Image, Text, Button, Stack, Heading } from "@chakra-ui/react";
+import { Box, Image, Text, Button, Grid,Stack, Heading, Center } from "@chakra-ui/react";
 import axios from "axios";
 
 const Product = () => {
@@ -20,39 +20,76 @@ const Product = () => {
   }, []); 
 
   return (
-    <Stack spacing={6} direction="row" justify="center" p={5} wrap="wrap">
-      {products.length > 0 ? (
-        products.map((product) => (
-          <Box
-            key={product.id}
-            borderWidth="1px"
-            borderRadius="lg"
-            p={4}
-            maxW="sm"
-            boxShadow="md"
-            textAlign="center"
-          >
-            <Image
-              src={product.image}
-              alt={product.title}
+    <>
+      <h1>Products</h1>
+      <Grid
+        templateColumns={{
+          base: "1fr",
+          md: "repeat(2, 1fr)",
+          lg: "repeat(3, 1fr)",
+        }}
+        gap={20}
+        p={6}
+        maxW="1200px"
+        maxH="2400px"
+      >
+        {products.length > 0 ? (
+          products.map((product) => (
+            <Box
+              key={product.id}
+              borderWidth="1px"
               borderRadius="lg"
-            />
-            <Stack mt="4" spacing="3">
-              <Heading size="md">{product.title}</Heading>
-              <Text noOfLines={2}>{product.price}</Text>
-              <Text color="blue.600" fontSize="2xl">
-                ${product.price}
-              </Text>
-            </Stack>
-            <Button colorScheme="blue" mt={4}>
-              Add to Cart
-            </Button>
-          </Box>
-        ))
-      ) : (
-        <Text>Loading products...</Text>
-      )}
-    </Stack>
+              p={4} // Reduced padding
+              boxShadow="lg"
+              textAlign="center"
+              bg="white"
+              display="flex"
+              flexDirection="column"
+              height="auto" // Prevents unnecessary stretching
+              maxH="1200px" // Limit card height
+            >
+              <Image
+                src={product.image}
+                alt={product.title}
+                borderRadius="lg"
+                maxH={80}
+                objectFit="cover"
+                mx="auto"
+              />
+              <Stack mt={4} spacing={4} flex="1" justify="space-between">
+                <Heading size="sm" fontWeight="semibold">
+                  {product.title}
+                </Heading>
+                <Text noOfLines={2} fontSize="xl" color="gray.600">
+                  {product.price}
+                </Text>
+                <Text
+                  fontSize="xl"
+                  fontWeight="bold"
+                  bgGradient="linear(to-r, blue.400, blue.600)"
+                  bgClip="text"
+                >
+                  ${product.price}
+                </Text>
+                <Button
+                  colorScheme="blue"
+                  size="lg"
+                  boxShadow="md"
+                  _hover={{ boxShadow: "xl" }}
+                  // Pushes the button to the bottom
+                >
+                  Add to Cart
+                </Button>
+              </Stack>
+            </Box>
+          ))
+        ) : (
+          <Text fontSize="lg" color="gray.500" textAlign="center">
+            Loading products...
+          </Text>
+        )}
+      </Grid>
+    </>
   );
 };
 
