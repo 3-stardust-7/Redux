@@ -1,37 +1,52 @@
-
+import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import './App.css'
-import Product from './Pages/Product'
-import { Provider } from "./components/ui/provider";
+import "./App.css";
+import Product from "./Pages/Product";
+//to implement routing we have some classes to import
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+import Dashboard from "./components/Dashboard";
+import Cart from "./components/Cart";
+import RootLayout from "./components/RootLayout";
 
 function App() {
- 
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<RootLayout/>}>
+        <Route index element={<Dashboard />}></Route>
+        <Route path="/cart" element={<Cart />}></Route>
+      </Route>
+    )
+  );
+
+//herer RouterProvider must be root and wrap all others like navigation
   return (
     <>
-      <Provider>
-        <Product />
-      </Provider>
+    <RouterProvider router={router}/>
     </>
   );
 }
 
-export default App
+export default App;
 
-
-
-// import { useState } from 'react'
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import './App.css'
-// import Product from './components/Product'
+// import Product from './Pages/Product'
+// import { Provider } from "./components/ui/provider";
 
 // function App() {
-//   const [count, setCount] = useState(0)
 
 //   return (
 //     <>
-//      <Product/>
+//       <Provider>
+//         <Product />
+//       </Provider>
 //     </>
-//   )
+//   );
 // }
 
 // export default App
