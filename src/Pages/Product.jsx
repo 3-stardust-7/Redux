@@ -133,7 +133,7 @@ const Product = () => {
   }, []); // Empty dependency array ensures this runs only once
 
   const cards = products.map((product) => (
-    <div className="col-md-3" style={{ marginBottom: "10px" }}>
+    <div className="col-md-3 m-8" style={{ marginBottom: "20px" }}>
       <Card key={product.id} className="h-100">
         <div className="flex justify-center">
           <Card.Img
