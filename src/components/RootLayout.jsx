@@ -7,6 +7,7 @@ import store from "../Store/store";
 const RootLayout = () => {
   return (
     <>
+    {/* now all components know aboyt redux state */}
       <Provider store={store}>
         <Navbar />
         <main>
