@@ -1,17 +1,31 @@
 import React, { useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
 import { useDispatch, useSelector } from "react-redux";
 import { add } from "../Store/CartSlice";
 import { getProducts } from "../Store/ProductSlice";
+import statusCode from "../utils/StatusCode";
 
 const Product = () => {
   const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.products); // Ensure correct state usage
+  const { data: products, status } = useSelector((state) => state.products); // Corrected variable usage
 
   useEffect(() => {
     dispatch(getProducts()); // Fetch products on component mount
   }, [dispatch]);
+
+  if (status === statusCode.LOADING) {
+    return <p>Loading...</p>; // Show loading state
+  }
+
+  if (status === statusCode.ERROR) {
+    return (
+      <Alert key="danger" variant="danger">
+        Oops Something Went Wrong!
+      </Alert>
+    );
+  }
 
   const addToCart = (product) => {
     dispatch(add(product));
@@ -21,9 +35,9 @@ const Product = () => {
     <div>
       <h1>Products</h1>
       <div className="row">
-        {data?.map(
+        {products?.map(
           (
-            product // Ensure 'data' is accessed correctly
+            product // Corrected reference to 'products'
           ) => (
             <div
               key={product.id}
