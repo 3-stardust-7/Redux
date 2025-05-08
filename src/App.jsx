@@ -13,6 +13,7 @@ import Dashboard from "./components/Dashboard";
 import Cart from "./components/Cart";
 import RootLayout from "./components/RootLayout";
 import CategoryPage from "./Pages/CategoryPage";
+import Signup from "./Pages/SignUp";
 
 function App() {
   const router = createBrowserRouter(
@@ -21,14 +22,15 @@ function App() {
         <Route index element={<Dashboard />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="category/:categoryName" element={<CategoryPage />} />
+        <Route path="/signup" element={<Signup />}></Route>
       </Route>
     )
   );
 
-//herer RouterProvider must be root and wrap all others like navigation
+  //herer RouterProvider must be root and wrap all others like navigation
   return (
     <>
-    <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </>
   );
 }
