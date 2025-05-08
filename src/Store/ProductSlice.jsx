@@ -41,6 +41,7 @@ export const getProducts = createAsyncThunk(
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const result = await response.json();
+        console.log("Fetched Products in thunk:", result);
       return result;
     } catch (error) {
       return rejectWithValue(error.message); // This ensures rejection
@@ -82,7 +83,6 @@ export const getProducts = createAsyncThunk(
 //   return result;
 // });
 //krish code
-
 
 // export const getProducts = createAsyncThunk("products/get", async () => {
 //   try {

@@ -12,13 +12,15 @@ import {
 import Dashboard from "./components/Dashboard";
 import Cart from "./components/Cart";
 import RootLayout from "./components/RootLayout";
+import CategoryPage from "./Pages/CategoryPage";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<RootLayout/>}>
+      <Route path="/" element={<RootLayout />}>
         <Route index element={<Dashboard />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
+        <Route path="category/:categoryName" element={<CategoryPage />} />
       </Route>
     )
   );
